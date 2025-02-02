@@ -8,7 +8,7 @@ export const validateUserData = async(req, res, next) =>{
         });
     const dataValidation = await UserSchema.validate(req.body[0]);
     if(dataValidation.hasOwnProperty('error')){
-        res.status(400).send({message:dataValidation.error.details[0].message});
+        res.status(400).send({message:dataValidation.error.details[0].message.split('\"').join('')});
     }
     else if(dataValidation.value){
         next();

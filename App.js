@@ -3,6 +3,7 @@ import userRouter from './routers/user.router.js';
 import 'dotenv/config';
 
 const app = express();
+
 const PORT = process.env.PORT;
 
 app.use(express.json());

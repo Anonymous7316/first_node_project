@@ -1,5 +1,16 @@
 import Joi from "joi";
 
+/**
+ * Middleware function to validate user data against a schema.
+ * Uses Joi validation to ensure the request body contains required name and role fields.
+ * 
+ * @param {Object} req - Express request object containing user data in body
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
+ * @returns {void} Sends 400 response if validation fails, calls next() if successful
+ * 
+ * @throws {Object} Returns 400 status with error message if validation fails
+ */
 export const validateUserData = async(req, res, next) =>{
     const UserSchema = Joi.object(
         {

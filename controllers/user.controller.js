@@ -1,6 +1,5 @@
 import axios from "axios";
 import { User } from "../models/user.model.js";
-import { get } from "mongoose";
 
 /**
  * Retrieves all users from the database.

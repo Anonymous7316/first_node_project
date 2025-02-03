@@ -2,8 +2,9 @@ import axios from "axios";
 import { User } from "../models/user.model.js";
 
 export const getUser = async(req,res) =>{
-    const userData = await axios('https://jsonplaceholder.typicode.com/users');//Instead define Mongoose Model
-    res.status(200).send(userData.data);
+    //const userData = await axios('https://jsonplaceholder.typicode.com/users');//Instead define Mongoose Model
+    const userData = await User.find({});
+    res.status(200).send(userData);
 }
 
 export const addUser = async (req,res)=>{

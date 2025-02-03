@@ -14,7 +14,7 @@ export const addUser = async (req,res)=>{
     }
     catch(err){
         console.log(err)
-        res.status(201).send({message:err})
+        res.status(400).send({message:err})
     }
 }
 

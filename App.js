@@ -4,7 +4,6 @@ import 'dotenv/config';
 import connectDB from './db/connect.js';
 
 const app = express();
-connectDB();
 
 const PORT = process.env.PORT;
 
@@ -13,6 +12,7 @@ app.use('/users',userRouter);
 
 app.listen(PORT,()=>{
     console.log(`Listning at PORT ${PORT}`)
+    connectDB();
 })
 
 

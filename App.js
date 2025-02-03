@@ -8,11 +8,14 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.json());
-app.use('/users',userRouter);
+app.use('/users', userRouter);
 
-app.listen(PORT,()=>{
-    console.log(`Listning at PORT ${PORT}`)
-    connectDB();
-})
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Listening at PORT ${PORT}`);
+    });
+}).catch((error) => {
+    console.error('Failed to connect to the database:', error);
+});
 
 

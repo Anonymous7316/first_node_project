@@ -7,6 +7,10 @@ import mongoose from "mongoose";
  * @property {string} role - The role assigned to the user (required)
  */
 export const UserSchema = new mongoose.Schema({
-    name:{type:String, required:true, unique: true},
+    name:{type: String, required:true, unique: true, validate: {
+        validator: (name)=>{
+            return isNaN(name);
+        }
+    }},
     role:{type:String, require:true}
 });

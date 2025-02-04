@@ -45,10 +45,12 @@ export const getUserById = async(req,res) =>{
 /**
  * Adds a new user to the database
  * @async
- * @param {import('express').Request} req - Express request object containing user data in the body
- * @param {import('express').Response} res - Express response object
+ * @param {Object} req - Express request object
+ * @param {Object} req.body - Request body containing user data
+ * @param {Object} res - Express response object
  * @returns {Promise<void>} - Returns a promise that resolves when user is created
- * @throws {Error} - Throws an error if user creation fails
+ * @throws {Error} - Throws error if duplicate entry or validation fails
+ * @description Handles user creation with error handling for duplicate entries and validation errors
  */
 export const addUser = async (req,res)=>{
     console.log(req.body)
@@ -60,6 +62,9 @@ export const addUser = async (req,res)=>{
         console.log(err);
         if(err.code === 11000){
             res.status(400).send({message:"Duplicate Entry!"})
+        }
+        else if(err.name === "ValidationError"){
+            res.status(400).send({message:err.message})
         }
         else{
             res.status(400).send({message:err})

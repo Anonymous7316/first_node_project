@@ -12,12 +12,12 @@ import Joi from "joi";
  * @throws {Object} Returns 400 status with error message if validation fails
  */
 export const validateUserData = async(req, res, next) =>{
-    const UserSchema = Joi.object(
+    const UserSchema = Joi.array().items(Joi.object(
         {
             name:Joi.string().required(),
             role:Joi.string().required()
-        });
-    const dataValidation = await UserSchema.validate(req.body[0]);
+        }));
+    const dataValidation = await UserSchema.validate(req.body);
     if(dataValidation.hasOwnProperty('error')){
         res.status(400).send({message:dataValidation.error.details[0].message.split('\"').join('')});
     }

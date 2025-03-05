@@ -1,14 +1,24 @@
-name: Build and Deploy
+name: Build Server
 
 on:
   push:
     branches:
-      - main
+      - '*'
 
 jobs:
-  build:
+  setup-build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        run: echo "Checking out code..."
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21
+          
+      - name: Clone repository
+        uses: actions/checkout@v4
+       
+      - name: Install dependencies
+        run: npm install
 
+      - name: Run tests
+        run: npm run test
